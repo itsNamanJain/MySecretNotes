@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
-const Signup = () => {
+const Signup = (props) => {
   const host = "http://localhost:5000";
   let history = useHistory();
 
@@ -27,15 +27,21 @@ const Signup = () => {
     const json = await response.json();
     console.log(json);
     // Redirect to Home Page
-    localStorage.setItem("token", json.token);
+    if(json.success){
+      localStorage.setItem("token", json.token);
     history.push("/");
+    props.showAlert("Account Created SuccessFully ","success")
+    }
+    else{
+     props.showAlert("Invalid Credentials","danger");
+    }
   };
   return (
-      <div className="container mt-3">
+      <div className="container mt-2">
           <h2>Create an account to continue using MySecrets</h2>
-    <div className="container my-3">
+    <div className="container my-2">
       <form onSubmit={handleSubmit}>
-        <div className="mb-3">
+        <div className="mb-2">
           <label htmlFor="name" className="form-label">
             Name
           </label>
@@ -49,8 +55,8 @@ const Signup = () => {
             required
           />
         </div>
-        <div className="mb-3">
-          <label htmlFor="email" className="form-label">
+        <div className="mb-2">
+          <label htmlFor="emil" className="form-label">
             Email address
           </label>
           <input
@@ -64,7 +70,7 @@ const Signup = () => {
             aria-describedby="emailHelp"
           />
         </div>
-        <div className="mb-3">
+        <div className="mb-2">
           <label htmlFor="password" className="form-label">
             Password
           </label>

@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState, useRef } from "react";
 import { useHistory } from "react-router";
 import noteContext from "../context/noteContext";
 import NoteItem from "./NoteItem";
-const Notes = () => {
+const Notes = (props) => {
   const context = useContext(noteContext);
   const { notes, fetchNotes, updateNote } = context;
   let history=useHistory();
@@ -40,6 +40,7 @@ const Notes = () => {
   const update = (e) => {
     updateNote(note.id, note.etitle, note.edescription, note.etag);
     refClose.current.click();
+    props.showAlert("Notes Updated Successfully","success")
   };
 
   return (
@@ -78,7 +79,7 @@ const Notes = () => {
             </div>
             <div className="modal-body">
               <form className="container my-3">
-                <div className="mb-3">
+                <div className="mb-2">
                   <label htmlFor="etitle" className="form-label">
                     Title
                   </label>
@@ -94,7 +95,7 @@ const Notes = () => {
                     value={note.etitle}
                   />
                 </div>
-                <div className="mb-3">
+                <div className="mb-2">
                   <label htmlFor="edescription" className="form-label">
                     Description
                   </label>
@@ -109,7 +110,7 @@ const Notes = () => {
                     value={note.edescription}
                   ></textarea>
                 </div>
-                <div className="mb-3">
+                <div className="mb-2">
                   <label htmlFor="etag" className="form-label">
                     Tag
                   </label>
@@ -148,7 +149,7 @@ const Notes = () => {
       </div>
       <div className="row">
         {notes.map((note) => {
-          return <NoteItem key={note._id} updateNote={editNote} note={note} />;
+          return <NoteItem key={note._id} updateNote={editNote} showAlert={props.showAlert} note={note} />;
         })}
       </div>
     </>
