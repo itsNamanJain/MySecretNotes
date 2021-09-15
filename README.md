@@ -9,6 +9,8 @@ It will use Mongodb to store user's data and notes in mysecrets database of your
 
 ## Available Scrips
 
+Open this folder  in your terminal and type the commands below to use it 
+
 ### Front-end
 In the project directory, you can run:
 ```bash
@@ -33,7 +35,7 @@ In the project directory, you can run:
 Will install all the dependencies for this project.
 
 ```bash
-  nodemon index.js
+  nodemon backend/index.js
 ```
 Runs the backend server in the development mode on port
 ```bash
